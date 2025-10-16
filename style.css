@@ -1,0 +1,50 @@
+html {
+    background-image: url('sorocaba-sp-6.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    margin:0;
+    padding:0%;
+
+    
+}
+
+body{
+    background-color: rgb(31, 30, 30);
+    border-radius: 50px;
+    margin: 80px;
+    padding: 50px;
+
+
+.feed {
+  margin: 0 auto; 
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+}
+
+.entrar {
+  position: absolute;
+  right: 40px;
+  top: 20px;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  transition: 0.3s;
+}
+.entrar:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.conteudo {
+    color: white;
+    width: 70%;
+    margin: 80px auto 0 auto; /* <-- esse 80px cria o espaço acima */
+    padding: 30px;
+    border-radius: 25px;
+}
+}
