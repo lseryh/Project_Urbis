@@ -43,7 +43,7 @@ body{
 .conteudo {
     color: white;
     width: 70%;
-    margin: 80px auto 0 auto; /* <-- esse 80px cria o espaço acima */
+    margin: 80px auto 0 auto;
     padding: 30px;
     border-radius: 25px;
 }

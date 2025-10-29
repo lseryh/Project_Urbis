@@ -1,0 +1,88 @@
+html {
+    background-image: url(sorocaba-sp-6.png) ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    margin:0;
+    padding:0%;
+}
+
+
+body{
+    background-color: rgb(31, 30, 30);
+    border-radius: 50px;
+    margin: 80px auto;
+    padding: 40px;
+    width: 80%;   
+    height: 50vh; 
+    border-radius: 40px; 
+
+}
+
+
+.container {
+    height: 50vh;
+    display: flex;
+    position:absolute;
+    left: 42%;
+    bottom:20%;
+}
+
+.login {
+    position:absolute;
+    left: 10%;
+    color: white;
+    bottom: 100%;
+    font-size: 80px;
+}
+
+
+.links-login {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 15px;
+    margin-left: 2px;
+    margin-right: auto;
+}
+
+.links-login a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap; 
+}
+
+.links-login a:hover {
+    text-decoration: underline;
+}
+
+.campo {
+    position:left;
+    width: 70%;
+    padding: 12px;
+    margin: 15px 0;
+    border: none;
+    border-radius: 20px;
+    font-size: 12px;
+    text-align: justify;
+}
+
+.botao {
+    width: 20%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s;
+    }
+
+.botao:hover {
+    background-color: #349b4a;
+}
+
