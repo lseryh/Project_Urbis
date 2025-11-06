@@ -1,0 +1,34 @@
+{
+  "name": "urbis-project",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000P\u0000r\u0000o\u0000j\u0000e\u0000c\u0000t\u0000_\u0000U\u0000r\u0000b\u0000i\u0000s\u0000\r\u0000 \u0000",
+  "main": "conexao.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lseryh/Project_Urbis.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lseryh/Project_Urbis/issues"
+  },
+  "homepage": "https://github.com/lseryh/Project_Urbis#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.2",
+    "multer": "^2.0.2",
+    "mysql": "^2.18.1",
+    "nodemailer": "^7.0.10"
+  }
+}

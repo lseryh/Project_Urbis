@@ -1,0 +1,93 @@
+html {
+    background-image: url(sorocaba-sp-6.png) ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    margin:0;
+    padding:0%;
+}
+
+
+body{
+    background-color: rgba(0, 0, 0, 0.7);
+    margin: 80px auto;
+    padding: 50px;
+    width: 60%;
+    border-radius: 12px;
+    color: #f0f0f0;
+    height: 50vh;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+
+}
+
+
+.container {
+    height: 50vh;
+    display: flex;
+    position:absolute;
+    left: 42%;
+    bottom:20%;
+}
+
+.login {
+    position:absolute;
+    left: 10%;
+    color: #00bcd4;
+    bottom: 100%;
+    font-size: 80px;
+}
+
+
+.links-login {
+    display: flex;
+    justify-content: space-between;
+    width: 130%;
+    margin-top: 15px;
+    margin-left: 2px;
+    margin-right: auto;
+}
+
+.links-login a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap; 
+}
+
+.links-login a:hover {
+    text-decoration: underline;
+}
+
+.campo {
+    position:left;
+    width: 120%;
+    padding: 12px;
+    margin: 15px 0;
+    border: none;
+    border-radius: 20px;
+    font-size: 12px;
+    text-align: justify;
+}
+
+.botao {
+    position: absolute;
+    bottom: 72%;
+    width: 40%;
+    left: 140%;
+    padding: 12px;
+    margin-top: 12px;
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s;
+    }
+
+.botao:hover {
+    background-color: #00bcd4;
+}
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportar Ocorrência</title>
+    <link rel="stylesheet" href="report.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <button class="back-btn" onclick="voltarFeed()">← Voltar para o Feed</button>
+
+            <h2>Reportar Ocorrência</h2>
+
+            <form id="registro-form" enctype="multipart/form-data">
+                <div class="input-group">
+                    <label for="comentario">Comentário</label>
+                    <input type="text" id="comentario" placeholder="Descreva o problema..." required>
+                </div>
+
+                <div class="input-group">
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria" required>
+                        <option value="infraestrutura">Infraestrutura</option>
+                        <option value="iluminacao">Iluminação</option>
+                        <option value="saneamento">Saneamento</option>
+                        <option value="meio-ambiente">Meio ambiente</option>
+                        <option value="transporte">Transporte</option>
+                        <option value="inclusao">Inclusão</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="foto">Foto</label>
+                    <input type="file" id="foto" accept="image/*" required>
+                </div>
+
+                <button type="submit" class="btn">Postar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function voltarFeed() {
+            window.location.href = "feed.html"; // altere se o nome do arquivo for outro
+        }
+    </script>
+</body>
+</html>
