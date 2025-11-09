@@ -1,0 +1,171 @@
+html {
+  background-image: url('sorocaba-sp-6.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #fff;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== TOPO ===== */
+.topo {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.sair {
+  color: cyan;
+  text-decoration: none;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 15px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.sair:hover {
+  background: cyan;
+  color: black;
+}
+
+/* ===== CONTEÚDO ===== */
+.conteudo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+.feed-titulo {
+  color: cyan;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.feed-container {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  width: 600px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== ITENS DO FEED ===== */
+.feed-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.feed-item:hover {
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.feed-item h3 {
+  margin: 0 0 8px 0;
+  color: cyan;
+  font-size: 1.2rem;
+}
+
+.feed-item p {
+  margin: 5px 0;
+  color: #eee;
+}
+
+.feed-item small {
+  display: block;
+  color: #bbb;
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+/* ===== IMAGEM MINIATURA ===== */
+.feed-imagem {
+  width: 100%;
+  max-height: 250px;
+  border-radius: 10px;
+  margin-top: 10px;
+  object-fit: cover;
+  border: 2px solid rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.feed-imagem:hover {
+  transform: scale(1.03);
+}
+
+/* ===== LIGHTBOX (imagem ampliada) ===== */
+#lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 12px;
+  border: 2px solid cyan;
+  box-shadow: 0 0 20px cyan;
+}
+
+#lightbox:target {
+  display: flex;
+}
+
+/* ===== ESTADO DE CARREGAMENTO ===== */
+.carregando {
+  text-align: center;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* ===== BOTÃO INFERIOR ===== */
+.botoes-inferiores {
+  margin-top: 25px;
+}
+
+.botao {
+  display: inline-block;
+  background-color: cyan;
+  color: black;
+  padding: 12px 30px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+.botao:hover {
+  background-color: #00e0e0;
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+}

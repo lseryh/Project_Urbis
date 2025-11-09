@@ -1,50 +1,131 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportar Ocorrência</title>
-    <link rel="stylesheet" href="report.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reportar Ocorrência</title>
+  <link rel="stylesheet" href="report.css" />
 </head>
+
 <body>
-    <div class="container">
-        <div class="form-box">
-            <button class="back-btn" onclick="voltarFeed()">← Voltar para o Feed</button>
+  <div class="container">
+    <div class="form-box">
+      <button class="back-btn" onclick="voltarFeed()">← Voltar para o Feed</button>
 
-            <h2>Reportar Ocorrência</h2>
+      <h2>Reportar Ocorrência</h2>
 
-            <form id="registro-form" enctype="multipart/form-data">
-                <div class="input-group">
-                    <label for="comentario">Comentário</label>
-                    <input type="text" id="comentario" placeholder="Descreva o problema..." required>
-                </div>
-
-                <div class="input-group">
-                    <label for="categoria">Categoria</label>
-                    <select id="categoria" required>
-                        <option value="infraestrutura">Infraestrutura</option>
-                        <option value="iluminacao">Iluminação</option>
-                        <option value="saneamento">Saneamento</option>
-                        <option value="meio-ambiente">Meio ambiente</option>
-                        <option value="transporte">Transporte</option>
-                        <option value="inclusao">Inclusão</option>
-                    </select>
-                </div>
-
-                <div class="input-group">
-                    <label for="foto">Foto</label>
-                    <input type="file" id="foto" accept="image/*" required>
-                </div>
-
-                <button type="submit" class="btn">Postar</button>
-            </form>
+      <form id="registro-form" enctype="multipart/form-data">
+        <div class="input-group">
+          <label for="comentario">Comentário</label>
+          <input
+            type="text"
+            id="comentario"
+            name="comentario"
+            placeholder="Descreva o problema..."
+            required
+          />
         </div>
-    </div>
 
-    <script>
-        function voltarFeed() {
-            window.location.href = "feed.html"; // altere se o nome do arquivo for outro
+        <div class="input-group">
+          <label for="categoria">Categoria</label>
+          <select id="categoria" name="categoria" required>
+            <option value="">Selecione uma categoria</option>
+            <option value="infraestrutura">Infraestrutura</option>
+            <option value="iluminacao">Iluminação</option>
+            <option value="saneamento">Saneamento</option>
+            <option value="meio-ambiente">Meio ambiente</option>
+            <option value="transporte">Transporte</option>
+            <option value="inclusao">Inclusão</option>
+          </select>
+        </div>
+
+        <!-- NOVO CAMPO DE LOCALIZAÇÃO -->
+        <div class="input-group">
+          <label for="local">Localização</label>
+          <input
+            type="text"
+            id="local"
+            name="local"
+            placeholder="Aguardando localização..."
+            required
+          />
+          <small id="status-local" style="color:#ccc;font-size:12px;"></small>
+        </div>
+
+        <div class="input-group">
+          <label for="foto">Foto</label>
+          <input type="file" id="foto" name="foto" accept="image/*" required />
+        </div>
+
+        <button type="submit" class="btn">Postar</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function voltarFeed() {
+      window.location.href = "feed.html";
+    }
+
+    // Obtém localização automática
+    window.addEventListener("load", () => {
+      const statusLocal = document.getElementById("status-local");
+      const campoLocal = document.getElementById("local");
+
+      if (!navigator.geolocation) {
+        statusLocal.textContent = "⚠️ Geolocalização não suportada.";
+        campoLocal.placeholder = "Digite o local manualmente";
+        return;
+      }
+
+      statusLocal.textContent = "📍 Obtendo localização...";
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const lat = pos.coords.latitude.toFixed(6);
+          const lon = pos.coords.longitude.toFixed(6);
+          campoLocal.value = `${lat}, ${lon}`;
+          statusLocal.textContent = "✅ Localização detectada automaticamente.";
+        },
+        (err) => {
+          console.warn("Erro ao obter localização:", err);
+          statusLocal.textContent = "⚠️ Não foi possível detectar localização. Digite manualmente.";
+          campoLocal.placeholder = "Ex: Rua das Flores, 120 - Centro";
         }
-    </script>
+      );
+    });
+
+    // Envio do formulário
+    document.getElementById("registro-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch("http://localhost:3000/api/ocorrencias", {
+          method: "POST",
+          body: formData,
+        });
+
+        let resultado;
+        try {
+          resultado = await response.json();
+        } catch {
+          resultado = { error: "Resposta inválida do servidor" };
+        }
+
+        if (response.ok) {
+          alert("✅ Ocorrência registrada com sucesso!");
+          window.location.href = "feed.html";
+        } else {
+          console.error("Erro no servidor:", resultado);
+          alert("Erro ao registrar ocorrência: " + (resultado.error || "Erro desconhecido"));
+        }
+      } catch (err) {
+        console.error("Erro de conexão:", err);
+        alert("Erro de conexão com o servidor: " + err.message);
+      }
+    });
+  </script>
 </body>
 </html>

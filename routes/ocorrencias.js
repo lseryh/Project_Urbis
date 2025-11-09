@@ -1,44 +1,57 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const Ocorrencia = require('../models/Ocorrencia');
+const path = require('path');
+const Ocorrencia = require('../models/ocorrencia');
 
-// Configuração do multer (upload de imagens)
+// ===== CONFIGURAÇÃO DO MULTER =====
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Pasta de destino
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, '..', 'uploads')); // salva dentro de /uploads
   },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // nome único
   }
 });
 
 const upload = multer({ storage });
 
-// Rota para cadastrar nova ocorrência
-router.post('/nova', upload.single('foto'), async (req, res) => {
+// ===== ROTA PARA CRIAR UMA NOVA OCORRÊNCIA =====
+router.post('/', upload.single('foto'), async (req, res) => {
   try {
-    const { local, data, comentario } = req.body;
-    const foto = req.file ? req.file.filename : null;
+    const { comentario, categoria, local } = req.body;
 
-    const novaOcorrencia = new Ocorrencia({ local, data, comentario, foto });
+    if (!comentario || !categoria) {
+      return res.status(400).json({ error: "Preencha todos os campos obrigatórios." });
+    }
+
+    const novaOcorrencia = new Ocorrencia({
+      descricao: comentario,
+      categoria,
+      local: local || "Não informado",
+      imagemUrl: req.file ? `/uploads/${req.file.filename}` : null
+    });
+
     await novaOcorrencia.save();
+    console.log("✅ Ocorrência salva:", novaOcorrencia);
 
-    res.status(201).json({ message: 'Ocorrência registrada com sucesso!' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Erro ao salvar ocorrência.' });
+    res.status(201).json({ message: "Ocorrência registrada com sucesso!", ocorrencia: novaOcorrencia });
+  } catch (err) {
+    console.error("Erro ao registrar ocorrência:", err);
+    res.status(500).json({ error: "Erro ao registrar ocorrência." });
   }
 });
 
-// Rota para listar todas as ocorrências
+//listar todas as ocorrências
 router.get('/', async (req, res) => {
   try {
-    const ocorrencias = await Ocorrencia.find().sort({ criadoEm: -1 });
+    const ocorrencias = await Ocorrencia.find().sort({ createdAt: -1 }); // mais recentes primeiro
     res.json(ocorrencias);
   } catch (error) {
-    res.status(500).json({ message: 'Erro ao buscar ocorrências.' });
+    console.error('Erro ao listar ocorrências:', error);
+    res.status(500).json({ error: 'Erro ao buscar ocorrências' });
   }
 });
+
 
 module.exports = router;

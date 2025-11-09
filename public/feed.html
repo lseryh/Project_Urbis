@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Urbis Project</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <title>Urbis Project - Feed</title>
+  <link rel="stylesheet" href="feed.css" />
+  <script src="feed.js" defer></script>
 </head>
 
 <body>
@@ -15,19 +14,54 @@
   </header>
 
   <main class="conteudo">
-    <h1 class="feed">Feed</h1>
-   <label for="local">Local:</label>
-<input type="text" id="local" name="local" placeholder="Digite o local" />
+    <h1 class="feed-titulo">Feed de Ocorrências</h1>
 
-<label for="data">Data:</label>
-<input type="date" id="data" name="data" />
+    <div id="feed" class="feed-container">
+      <p class="carregando">Carregando ocorrências...</p>
+    </div>
 
-
- <div class="botoes-inferiores">
-  <a href="report.html" class="botao">Reportar ocorrência</a>
-</div>
-
+    <div class="botoes-inferiores">
+      <a href="report.html" class="botao">Reportar ocorrência</a>
+    </div>
   </main>
-</body>
 
+  <script>
+    async function carregarOcorrencias() {
+      const container = document.getElementById('feed');
+      container.innerHTML = '<p class="carregando">Carregando ocorrências...</p>';
+
+      try {
+        const response = await fetch('/api/ocorrencias');
+        const ocorrencias = await response.json();
+
+        if (ocorrencias.length === 0) {
+          container.innerHTML = '<p class="carregando">Nenhuma ocorrência registrada ainda.</p>';
+          return;
+        }
+
+        container.innerHTML = ''; // limpa o "Carregando..."
+
+        ocorrencias.forEach(oc => {
+          const div = document.createElement('div');
+          div.classList.add('ocorrencia-card');
+
+          div.innerHTML = `
+            <h3>${oc.titulo || 'Ocorrência sem título'}</h3>
+            <p>${oc.descricao || 'Sem descrição informada.'}</p>
+            ${oc.imagem ? `<img src="${oc.imagem}" alt="Imagem da ocorrência">` : ''}
+            <p><strong>Data:</strong> ${new Date(oc.createdAt).toLocaleString('pt-BR')}</p>
+            ${oc.latitude && oc.longitude ? `<p><strong>Localização:</strong> ${oc.latitude}, ${oc.longitude}</p>` : ''}
+          `;
+
+          container.appendChild(div);
+        });
+      } catch (error) {
+        console.error('Erro ao carregar ocorrências:', error);
+        container.innerHTML = '<p class="carregando">Erro ao carregar as ocorrências.</p>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', carregarOcorrencias);
+  </script>
+</body>
 </html>
