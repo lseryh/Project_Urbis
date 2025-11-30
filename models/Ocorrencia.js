@@ -4,6 +4,7 @@ const ocorrenciaSchema = new mongoose.Schema({
   titulo: String,
   descricao: String,
   local: String,
+  categoria: String,
   imagem: String,
 }, {
   timestamps: true

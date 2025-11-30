@@ -8,12 +8,31 @@ html {
     padding:0%;
 }
 
+.urbis-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #eee;
+}
+
+.urbis-header span {
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+  letter-spacing: 0.5px;
+}
+
 
 body{
     background-color: rgba(0, 0, 0, 0.7);
-    margin: 80px auto;
-    padding: 50px;
-    width: 60%;
+    margin: 150px auto;
+    padding-top: 70px;
+    width: 50%;
     border-radius: 12px;
     color: #f0f0f0;
     height: 50vh;
@@ -28,7 +47,7 @@ body{
     display: flex;
     position:absolute;
     left: 42%;
-    bottom:20%;
+    bottom:10%;
 }
 
 .login {

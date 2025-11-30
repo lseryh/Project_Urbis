@@ -13,17 +13,19 @@
     <a href="login.html" class="sair">Sair</a>
   </header>
 
-  <main class="conteudo">
-    <h1 class="feed-titulo">Feed de Ocorrências</h1>
+  <div class="outer-container">
+    <main class="conteudo">
+      <h1 class="feed-titulo">Feed de Ocorrências</h1>
 
-    <div id="feed" class="feed-container">
-      <p class="carregando">Carregando ocorrências...</p>
-    </div>
+      <div id="feed" class="feed-container">
+        <p class="carregando">Carregando ocorrências...</p>
+      </div>
 
-    <div class="botoes-inferiores">
-      <a href="report.html" class="botao">Reportar ocorrência</a>
-    </div>
-  </main>
+      <div class="botoes-inferiores">
+        <a href="report.html" class="botao">Reportar ocorrência</a>
+      </div>
+    </main>
+  </div>
 
   <script>
     async function carregarOcorrencias() {
@@ -39,18 +41,18 @@
           return;
         }
 
-        container.innerHTML = ''; // limpa o "Carregando..."
+        container.innerHTML = '';
 
         ocorrencias.forEach(oc => {
           const div = document.createElement('div');
-          div.classList.add('ocorrencia-card');
+          div.classList.add('feed-item');
 
           div.innerHTML = `
             <h3>${oc.titulo || 'Ocorrência sem título'}</h3>
             <p>${oc.descricao || 'Sem descrição informada.'}</p>
-            ${oc.imagem ? `<img src="${oc.imagem}" alt="Imagem da ocorrência">` : ''}
-            <p><strong>Data:</strong> ${new Date(oc.createdAt).toLocaleString('pt-BR')}</p>
-            ${oc.latitude && oc.longitude ? `<p><strong>Localização:</strong> ${oc.latitude}, ${oc.longitude}</p>` : ''}
+            ${oc.imagem ? `<img class="feed-imagem" src="${oc.imagem}" alt="Imagem da ocorrência">` : ''}
+            <small><strong>Data:</strong> ${new Date(oc.createdAt).toLocaleString('pt-BR')}</small>
+            ${oc.latitude && oc.longitude ? `<small><strong>Localização:</strong> ${oc.latitude}, ${oc.longitude}</small>` : ''}
           `;
 
           container.appendChild(div);
